@@ -1,0 +1,9 @@
+schema: "https://swapi-graphql.netlify.app/.netlify/functions/index"
+documents: "src/**/*.graphql"
+generates:
+  src/generated/graphql.js:
+    plugins:
+      - "typescript-operations" # Generates operation result types and variables
+    config:
+      withHooks: true
+      skipTypename: true
