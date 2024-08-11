@@ -9,7 +9,7 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-const ApolloProvider = ({ children }) => (
+const ApolloProvider = ({ children }: any) => (
   <Provider client={client}>{children}</Provider>
 );
 

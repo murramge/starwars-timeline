@@ -4,16 +4,13 @@ export const GET_FILMS = gql`
   query GetFilms {
     allFilms {
       films {
+        id
         title
         director
         releaseDate
         speciesConnection {
           species {
             name
-            classification
-            homeworld {
-              name
-            }
           }
         }
       }
