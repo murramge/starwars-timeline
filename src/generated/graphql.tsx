@@ -1305,12 +1305,63 @@ export type VehiclesEdge = {
   node?: Maybe<Vehicle>;
 };
 
+export type GetFilmByIdQueryVariables = Exact<{
+  id: Scalars['ID']['input'];
+}>;
+
+
+export type GetFilmByIdQuery = { __typename?: 'Root', film?: { __typename?: 'Film', id: string, title?: string | null, director?: string | null, releaseDate?: string | null, openingCrawl?: string | null } | null };
+
 export type GetFilmsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetFilmsQuery = { __typename?: 'Root', allFilms?: { __typename?: 'FilmsConnection', films?: Array<{ __typename?: 'Film', id: string, title?: string | null, director?: string | null, releaseDate?: string | null, speciesConnection?: { __typename?: 'FilmSpeciesConnection', species?: Array<{ __typename?: 'Species', name?: string | null } | null> | null } | null } | null> | null } | null };
 
 
+export const GetFilmByIdDocument = gql`
+    query GetFilmById($id: ID!) {
+  film(id: $id) {
+    id
+    title
+    director
+    releaseDate
+    openingCrawl
+  }
+}
+    `;
+
+/**
+ * __useGetFilmByIdQuery__
+ *
+ * To run a query within a React component, call `useGetFilmByIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetFilmByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetFilmByIdQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetFilmByIdQuery(baseOptions: Apollo.QueryHookOptions<GetFilmByIdQuery, GetFilmByIdQueryVariables> & ({ variables: GetFilmByIdQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetFilmByIdQuery, GetFilmByIdQueryVariables>(GetFilmByIdDocument, options);
+      }
+export function useGetFilmByIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetFilmByIdQuery, GetFilmByIdQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetFilmByIdQuery, GetFilmByIdQueryVariables>(GetFilmByIdDocument, options);
+        }
+export function useGetFilmByIdSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetFilmByIdQuery, GetFilmByIdQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetFilmByIdQuery, GetFilmByIdQueryVariables>(GetFilmByIdDocument, options);
+        }
+export type GetFilmByIdQueryHookResult = ReturnType<typeof useGetFilmByIdQuery>;
+export type GetFilmByIdLazyQueryHookResult = ReturnType<typeof useGetFilmByIdLazyQuery>;
+export type GetFilmByIdSuspenseQueryHookResult = ReturnType<typeof useGetFilmByIdSuspenseQuery>;
+export type GetFilmByIdQueryResult = Apollo.QueryResult<GetFilmByIdQuery, GetFilmByIdQueryVariables>;
 export const GetFilmsDocument = gql`
     query GetFilms {
   allFilms {
